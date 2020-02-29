@@ -1,7 +1,9 @@
-from flask import Flask
+from flask import Flask, render_template
+from werkzeug.utils import redirect
+
 from data import db_session
-from data.news import News
 from data.users import User
+from forms.reg import RegisterForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -12,19 +14,30 @@ def main():
     app.run()
 
 
+@app.route('/register', methods=['GET', 'POST'])
+def reqister():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        if form.password.data != form.password_again.data:
+            return render_template('register.html', title='Регистрация',
+                                   form=form,
+                                   message="Пароли не совпадают")
+        session = db_session.create_session()
+        if session.query(User).filter(User.email == form.email.data).first():
+            return render_template('register.html', title='Регистрация',
+                                   form=form,
+                                   message="Такой пользователь уже есть")
+        user = User(
+            name=form.name.data,
+            email=form.email.data,
+            about=form.about.data
+        )
+        user.set_password(form.password.data)
+        session.add(user)
+        session.commit()
+        return redirect('/login')
+    return render_template('register.html', title='Регистрация', form=form)
+
+
 if __name__ == '__main__':
-    # main()
-    db_session.global_init("db/blogs.sqlite")
-
-    # user = User()
-    # user.name = 'Vasya'
-    # user.about = 'Biography'
-    # user.email = 'vasya@example.com'
-    #
-    # session = db_session.create_session()
-    # session.add(user)
-    # session.commit()
-
-    session = db_session.create_session()
-    for user in session.query(User).all():
-        print(user)
+    main()
