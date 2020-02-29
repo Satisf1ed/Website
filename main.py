@@ -1,5 +1,7 @@
 from flask import Flask
 from data import db_session
+from data.news import News
+from data.users import User
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -11,4 +13,18 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    db_session.global_init("db/blogs.sqlite")
+
+    # user = User()
+    # user.name = 'Vasya'
+    # user.about = 'Biography'
+    # user.email = 'vasya@example.com'
+    #
+    # session = db_session.create_session()
+    # session.add(user)
+    # session.commit()
+
+    session = db_session.create_session()
+    for user in session.query(User).all():
+        print(user)
