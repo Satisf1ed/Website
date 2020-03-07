@@ -29,7 +29,6 @@ def form_sample():
                                 <form class="login_form" method="post">
                                     <input class="form-control" placeholder="Введите имя" name="name">
                                     <input class="form-control" placeholder="Введите фамилию" name="surname">
-                                    <div class="form-group">
                             </div>
                                      <div>
                                         <form class="login_form" method="post">
