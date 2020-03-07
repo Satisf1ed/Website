@@ -1,43 +1,44 @@
-from flask import Flask, render_template
-from werkzeug.utils import redirect
-
-from data import db_session
-from data.users import User
-from forms.reg import RegisterForm
+from flask import Flask, url_for
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
-def main():
-    db_session.global_init("db/blogs.sqlite")
-    app.run()
+@app.route('/')
+def start():
+    return "Миссия Колонизация Марса"
 
 
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    form = RegisterForm()
-    if form.validate_on_submit():
-        if form.password.data != form.password_again.data:
-            return render_template('register.html', title='Регистрация',
-                                   form=form,
-                                   message="Пароли не совпадают")
-        session = db_session.create_session()
-        if session.query(User).filter(User.email == form.email.data).first():
-            return render_template('register.html', title='Регистрация',
-                                   form=form,
-                                   message="Такой пользователь уже есть")
-        user = User(
-            name=form.name.data,
-            email=form.email.data,
-            about=form.about.data
-        )
-        user.set_password(form.password.data)
-        session.add(user)
-        session.commit()
-        return redirect('/login')
-    return render_template('register.html', title='Регистрация', form=form)
+@app.route('/index')
+def index():
+    return "И на Марсе будут яблони цвести!"
+
+
+@app.route('/promotion')
+def promotion():
+    list_prom = ['Человечество вырастает из детства.', 'Человечеству мала одна планета.',
+                 'Мы сделаем обитаемыми безжизненные пока планеты.', 'И начнем с Марса!',
+                 'Присоединяйся!'
+                 ]
+
+    return '<br/>'.join(list_prom)
+
+
+@app.route('/image_mars')
+def mars():
+    return f'''<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}">
+    <title>Привет, Марс!</title>
+  <head>
+  <body>
+    <h1>Жди нас, Марс!</h1>
+    <img src="{url_for("static", filename="img/image_mars.jpg")}" alt="нэ получилось" />
+    <br/>Вот она какая, красная планета.
+  </body>
+</html>'''
 
 
 if __name__ == '__main__':
-    main()
+    app.run(port=8080, host='127.0.0.1')
