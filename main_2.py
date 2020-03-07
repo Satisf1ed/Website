@@ -45,8 +45,8 @@ def form_sample():
                                         <br/>
                                         <label for="form-check">Какие у вас профессии?</label>
                                             <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label">Инженер-исследователь</label>
+                                            <input id="check_1" type="checkbox" class="form-check-input" name="eng_1">
+                                            <label class="form-check-label" for="check_1">Инженер-исследователь</label>
                                             <br/>
                                             <input type="checkbox" class="form-check-input" name="accept">
                                             <label class="form-check-label">Инженер-строитель</label>
@@ -116,6 +116,7 @@ def form_sample():
         print(request.form['file'])
         print(request.form['about'])
         print(request.form['accept'])
+        print(request.form['eng_1'])
         print(request.form['sex'])
         return "Форма отправлена"
 
