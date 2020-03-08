@@ -48,32 +48,32 @@ def form_sample():
                                             <input id="check_1" type="checkbox" class="form-check-input" name="eng_1">
                                             <label class="form-check-label" for="check_1">Инженер-исследователь</label>
                                             <br/>
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label">Инженер-строитель</label>
+                                            <input id="check_2" type="checkbox" class="form-check-input" name="eng_2">
+                                            <label class="form-check-label" for="check_2">Инженер-строитель</label>
                                             <br/>
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label">Пилот</label>
+                                            <input id="check_3" type="checkbox" class="form-check-input" name="pilot">
+                                            <label class="form-check-label" for="check_3">Пилот</label>
                                             <br/>
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label">Метеоролог</label>
+                                            <input id="check_4" type="checkbox" class="form-check-input" name="meteo">
+                                            <label class="form-check-label" for="check_4">Метеоролог</label>
                                             <br/>
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label">Инженер по жизнеобеспечению</label>
+                                            <input id="check_5" type="checkbox" class="form-check-input" name="eng_3">
+                                            <label class="form-check-label" for="check_5">Инженер по жизнеобеспечению</label>
                                             <br/>
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label">Инженер по радиоционной защите</label>
+                                            <input id="check_6" type="checkbox" class="form-check-input" name="eng_4">
+                                            <label class="form-check-label" for="check_6">Инженер по радиоционной защите</label>
                                             <br/>
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label">Врач</label>
+                                            <input id="check_7" type="checkbox" class="form-check-input" name="doctor">
+                                            <label class="form-check-label" for="check_7">Врач</label>
                                             <br/>
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label">Кибербиолог</label>
+                                            <input id="check_8" type="checkbox" class="form-check-input" name="biolog">
+                                            <label class="form-check-label" for="check_8">Кибербиолог</label>
                                             <br/>
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label">Квантовый физик</label>
+                                            <input id="check_9" type="checkbox" class="form-check-input" name="phys">
+                                            <label class="form-check-label" for="check_9">Квантовый физик</label>
                                             <br/>
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label">Программист</label>
+                                            <input id="check_10" type="checkbox" class="form-check-input" name="prog">
+                                            <label class="form-check-label" for="check_10">Программист</label>
                                     </div>
                                     <div>
                                         <br/>
@@ -100,7 +100,8 @@ def form_sample():
                                         <label for="photo">Приложите фотографию</label>
                                         <input type="file" class="form-control-file" id="photo" name="file">
                                     </div>
-                                    <div class="form-group form-check">
+                                    <form method="post" enctype="multipart/form-data">
+                                      <div class="form-group form-check">
                                         <input type="checkbox" class="form-check-input" id="acceptRules" name="accept">
                                         <label class="form-check-label" for="acceptRules">Готов остаться на Марсе?</label>
                                     </div>
@@ -111,12 +112,22 @@ def form_sample():
                         </html>'''
     elif request.method == 'POST':
         print(request.form['email'])
-        print(request.form['password'])
+        print(request.form['name'])
+        print(request.form['surname'])
         print(request.form['class'])
         print(request.form['file'])
         print(request.form['about'])
-        print(request.form['accept'])
         print(request.form['eng_1'])
+        print(request.form['eng_2'])
+        print(request.form['eng_3'])
+        print(request.form['eng_4'])
+        print(request.form['pilot'])
+        print(request.form['doctor'])
+        print(request.form['phys'])
+        print(request.form['prog'])
+        print(request.form['meteo'])
+        print(request.form['biolog'])
+        print(request.form['accept'])
         print(request.form['sex'])
         return "Форма отправлена"
 
