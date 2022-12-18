@@ -10,7 +10,7 @@ def start():
 
 @app.route('/index')
 def index():
-    return "И на Марсе будут яблони цвести!"
+   pass
 
 
 @app.route('/promotion')
